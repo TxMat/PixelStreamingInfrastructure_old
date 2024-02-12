@@ -313,6 +313,7 @@ export class KeyboardController {
      */
     isKeyCodeBrowserKey(keyCode: number) {
         // Function keys or tab key are considered "browser keys" that we may wish to suppress by preventing them being process by browser.
-        return (keyCode >= 112 && keyCode <= 123) || keyCode === 9;
+        return (keyCode >= 112 && keyCode <= 123) || keyCode === 9 || keyCode === 18 || keyCode === 8;
+        // mat : added keyCode === 8 and keyCode === 18
     }
 }

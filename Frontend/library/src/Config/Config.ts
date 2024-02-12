@@ -287,7 +287,7 @@ export class Config {
                 Flags.UseMic,
                 'Use microphone',
                 'Make browser request microphone access and open an input audio track.',
-                false,
+                true,
                 useUrlParams
             )
         );
@@ -364,7 +364,7 @@ export class Config {
                 Flags.MatchViewportResolution,
                 'Match viewport resolution',
                 'Pixel Streaming will be instructed to dynamically resize the video stream to match the size of the video element.',
-                false,
+                true,
                 useUrlParams
             )
         );

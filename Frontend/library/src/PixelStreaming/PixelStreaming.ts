@@ -95,6 +95,13 @@ export class PixelStreaming {
 
         this.configureSettings();
 
+        // document.addEventListener('keydown', (event) => {
+        //     if (event.key === 'Alt') {
+        //         this.config.setFlagEnabled(Flags.HoveringMouseMode, !this.config.isFlagEnabled(Flags.MouseInput));
+        //         this._webRtcController.setMouseInputEnabled(!this.config.isFlagEnabled(Flags.MouseInput));
+        //     }
+        // });
+
         // setup WebRTC
         this.setWebRtcPlayerController(
             new WebRtcPlayerController(this.config, this)
