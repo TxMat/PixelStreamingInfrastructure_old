@@ -269,7 +269,7 @@ export class Application {
      */
     configureSettings(): void {
         // This builds all the settings sections and flags under this `settingsContent` element.
-        this.configUI.populateSettingsElement(
+        this.configUI.populateSettingsReducedElement(
             this.settingsPanel.settingsContentElement
         );
 

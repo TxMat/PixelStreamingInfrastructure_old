@@ -311,6 +311,144 @@ export class ConfigUI {
     }
 
     /**
+     * Setup flags with their default values and add them to the `Config.flags` map but with reduced settings.
+     * @param settingsElem - The element that contains all the individual settings sections, flags, and so on.
+     */
+    populateSettingsReducedElement(settingsElem: HTMLElement): void {
+        /* Setup all Pixel Streaming specific settings */
+        const psSettingsSection = this.buildSectionWithHeading(
+            settingsElem,
+            'Pixel Streaming'
+        );
+
+        // make settings show up in DOM
+        this.addSettingFlag(
+            psSettingsSection,
+            this.flagsUi.get(Flags.AutoConnect)
+        );
+        this.addSettingFlag(
+            psSettingsSection,
+            this.flagsUi.get(Flags.UseMic)
+        );
+        this.addSettingFlag(
+            psSettingsSection,
+            this.flagsUi.get(Flags.IsQualityController)
+        );
+        this.addSettingFlag(
+            psSettingsSection,
+            this.flagsUi.get(Flags.ForceMonoAudio)
+        );
+        this.addSettingFlag(
+            psSettingsSection,
+            this.flagsUi.get(Flags.ForceTURN)
+        );
+        this.addSettingFlag(
+            psSettingsSection,
+            this.flagsUi.get(Flags.SuppressBrowserKeys)
+        );
+        this.addSettingFlag(
+            psSettingsSection,
+            this.flagsUi.get(Flags.AFKDetection)
+        );
+        this.addSettingFlag(
+            psSettingsSection,
+            this.flagsUi.get(Flags.WaitForStreamer)
+        );
+
+        /* Setup all view/ui related settings under this section */
+        const viewSettingsSection = this.buildSectionWithHeading(
+            settingsElem,
+            'UI'
+        );
+        this.addSettingFlag(
+            viewSettingsSection,
+            this.flagsUi.get(Flags.MatchViewportResolution)
+        );
+
+        this.addSettingFlag(
+            viewSettingsSection,
+            this.flagsUi.get(Flags.HoveringMouseMode)
+        );
+
+        this.addSettingFlag(viewSettingsSection, this.flagsUi.get(LightMode));
+
+        /* Setup all encoder related settings under this section */
+        const inputSettingsSection = this.buildSectionWithHeading(
+            settingsElem,
+            'Input'
+        );
+
+        this.addSettingFlag(
+            inputSettingsSection,
+            this.flagsUi.get(Flags.KeyboardInput)
+        );
+
+        this.addSettingFlag(
+            inputSettingsSection,
+            this.flagsUi.get(Flags.MouseInput)
+        );
+
+        this.addSettingFlag(
+            inputSettingsSection,
+            this.flagsUi.get(Flags.TouchInput)
+        );
+
+        this.addSettingFlag(
+            inputSettingsSection,
+            this.flagsUi.get(Flags.GamepadInput)
+        );
+
+        this.addSettingFlag(
+            inputSettingsSection,
+            this.flagsUi.get(Flags.XRControllerInput)
+        );
+
+        /* Setup all encoder related settings under this section */
+        const AdvancedSettingsSection = this.buildSectionWithHeading(
+            settingsElem,
+            'Advanced'
+        );
+
+        this.addSettingNumeric(
+            AdvancedSettingsSection,
+            this.numericParametersUi.get(NumericParameters.MinQP)
+        );
+        this.addSettingNumeric(
+            AdvancedSettingsSection,
+            this.numericParametersUi.get(NumericParameters.MaxQP)
+        );
+
+        const preferredCodecOption = this.optionParametersUi.get(
+            OptionParameters.PreferredCodec
+        );
+        this.addSettingOption(
+            AdvancedSettingsSection,
+            this.optionParametersUi.get(OptionParameters.PreferredCodec)
+        );
+        if (
+            preferredCodecOption &&
+            [...preferredCodecOption.selector.options]
+                .map((o) => o.value)
+                .includes('Only available on Chrome')
+        ) {
+            preferredCodecOption.disable();
+        }
+
+        this.addSettingNumeric(
+            AdvancedSettingsSection,
+            this.numericParametersUi.get(NumericParameters.WebRTCFPS)
+        );
+        this.addSettingNumeric(
+            AdvancedSettingsSection,
+            this.numericParametersUi.get(NumericParameters.WebRTCMinBitrate)
+        );
+        this.addSettingNumeric(
+            AdvancedSettingsSection,
+            this.numericParametersUi.get(NumericParameters.WebRTCMaxBitrate)
+        );
+    }
+
+    /**
      * Add a SettingText element to a particular settings section in the DOM and registers that text in the text settings map.
      * @param settingsSection The settings section HTML element.
      * @param settingText The textual settings object.

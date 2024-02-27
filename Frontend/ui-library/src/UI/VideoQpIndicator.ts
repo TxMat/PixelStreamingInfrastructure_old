@@ -43,8 +43,28 @@ export class VideoQpIndicator {
 
             // set colors to not connected initially
             this.updateQpTooltip(-1);
+
+            this._rootElement.style.transition = 'bottom 0.5s ease';
+
+            document.addEventListener('fullscreenchange', this.handleFullscreenChange.bind(this));
         }
         return this._rootElement;
+    }
+
+    /**
+     * Handler for fullscreen change event
+     */
+    private handleFullscreenChange(): void {
+        // Check if the document is in fullscreen mode
+        const isInFullscreen = !!document.fullscreenElement;
+
+        if (isInFullscreen) {
+            // Hide the QP indicator when in fullscreen mode
+            this._rootElement.style.bottom = '-10%';
+        } else {
+                // Show the QP indicator when not in fullscreen mode
+                this._rootElement.style.bottom = '8%';
+            }
     }
 
     /**
@@ -217,7 +237,7 @@ export class VideoQpIndicator {
             this.statsText = `<div style="color: ${this.color}">Not connected</div>`;
         } else {
             this.color = 'lime';
-            this.qualityStatus.style.opacity = '1';
+            this.qualityStatus.style.opacity = '.9';
             this.statsText = `<div style="color: ${this.color}">Clear encoding quality</div>`;
             this.outer.setAttributeNS(null, 'fill', this.color);
             this.middle.setAttributeNS(null, 'fill', this.color);
