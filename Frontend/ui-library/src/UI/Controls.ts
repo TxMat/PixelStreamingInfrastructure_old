@@ -77,8 +77,30 @@ export class Controls {
                         this._rootElement.appendChild(this.xrIcon.rootElement);
                     }
                 });
-            };
+            }
+
+            // Add CSS styles for transition
+            this._rootElement.style.transition = 'left 0.5s ease';
+
+            // Add event listener for fullscreen change
+            document.addEventListener('fullscreenchange', this.handleFullscreenChange.bind(this));
         }
         return this._rootElement;
+    }
+
+    /**
+     * Handler for fullscreen change event
+     */
+    private handleFullscreenChange(): void {
+        // Check if the document is in fullscreen mode
+        const isInFullscreen = !!document.fullscreenElement;
+
+        if (isInFullscreen) {
+            // Hide the controls when in fullscreen mode
+            this._rootElement.style.left = '-10%';
+        } else {
+            // Show the controls when not in fullscreen mode
+            this._rootElement.style.left = '2%';
+        }
     }
 }

@@ -18,8 +18,7 @@ document.body.onload = function() {
 
 	const application = new Application({
 		stream,
-		onColorModeChanged: (isLightMode) => PixelStreamingApplicationStyles.setColorMode(isLightMode),
-		videoQpIndicatorConfig: {disableIndicator: true},
+		onColorModeChanged: (isLightMode) => PixelStreamingApplicationStyles.setColorMode(isLightMode)
 	});
 	// document.getElementById("centrebox").appendChild(application.rootElement);
 	document.body.appendChild(application.rootElement);
